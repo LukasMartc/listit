@@ -1,0 +1,64 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #78c2f2;
+    color: #000;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+}
+
+body,
+main,
+header,
+.task-input,
+button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main {
+    flex-direction: column;
+    background: #fff;
+    padding: 35px 20px;
+    border-radius: 9px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    min-width: 300px;
+    row-gap: 18px;
+}
+
+header {
+    column-gap: 6px;
+}
+
+h1 {
+    font-size: 32px;
+    margin: 0;
+}
+
+.task-input {
+    width: 400px;
+    position: relative;
+}
+
+input {
+    background-color: #eceef0;
+    padding: 14px 40px 14px 15px;
+    border-radius: 20px;
+    border: none;
+    font-size: 16px;
+    width: 100%;
+}
+
+button {
+    position: absolute;
+    right: 0px;
+    background-color: #31cc2f;
+    font-size: 40px;
+    font-weight: bold;
+    border-radius: 20px;
+    width: 45px;
+    height: 45px;
+    cursor: pointer;
+    border: none;
+}
