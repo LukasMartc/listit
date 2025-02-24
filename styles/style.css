@@ -10,7 +10,7 @@ body {
 body,
 main,
 header,
-.task-input,
+.container-task-input,
 button {
     display: flex;
     align-items: center;
@@ -36,12 +36,12 @@ h1 {
     margin: 0;
 }
 
-.task-input {
+.container-task-input {
     width: 400px;
     position: relative;
 }
 
-input {
+.task-input {
     background-color: #eceef0;
     padding: 14px 40px 14px 15px;
     border-radius: 20px;
@@ -50,15 +50,99 @@ input {
     width: 100%;
 }
 
-button {
+.add-update {
     position: absolute;
     right: 0px;
     background-color: #31cc2f;
-    font-size: 40px;
+    color: #000;
+    font-size: 33px;
     font-weight: bold;
     border-radius: 20px;
     width: 45px;
     height: 45px;
     cursor: pointer;
     border: none;
+    transition: 0.4s ease-in-out all;
+}
+
+.fa-solid.fa-rotate {
+    display: none;
+}
+
+.add-update:hover {
+    background-color: #2cb129;
+    color: #fff;
+}
+
+.container-alert .alert-msg {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.add-msg {
+    color: #2cb129;
+}
+
+.error-msg {
+    color: #eb0606;
+}
+
+
+.task-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+}
+
+.task-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #eceef0;
+    width: 100%;
+    padding: 11px;
+    border-radius: 7px;
+    column-gap: 12px;
+}
+
+.input-check {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    accent-color: #31cc2f;
+}
+
+.task-value {
+    margin: 0;
+    flex-grow: 1;
+}
+
+.btn-container {
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+}
+
+.fa-solid.fa-pen,
+.fa-solid.fa-trash-can {
+    cursor: pointer;
+    transition: 0.2s ease-in-out all;
+}
+
+.fa-solid.fa-pen:hover {
+    color: #78c2f2;
+}
+
+.fa-solid.fa-trash-can:hover {
+    color: #eb0606;
+}
+
+@media (max-width: 768px) {
+    .container-task-input {
+        width: 280px;
+    }
 }

@@ -12,13 +12,21 @@
             <h1>ListIt</h1>
             <img src="/assets/logo.png" alt="Lista ListIt Todo" width="35">
         </header>
-        <div class="task-input">
-            <input type="text" placeholder="Add your task">
-            <button>+</button>
+        <div class="container-task-input">
+            <input class="task-input" type="text" placeholder="Add your task">
+            <button class="add-update">
+                <i id="add-icon" class="fa-solid fa-plus"></i>
+                <i id="update-icon" class="fa-solid fa-rotate fa-spin"></i>
+            </button>
+        </div>
+        <div class="container-alert">
+            <p class="alert-msg"></p>
         </div>
         <section class="task-list">
-                
+            
         </section>
     </main>
+    <script src="https://kit.fontawesome.com/409f432a75.js" crossorigin="anonymous"></script>
+    <script src="scripts/script.js"></script>
 </body>
 </html>
