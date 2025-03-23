@@ -74,6 +74,13 @@ h1 {
     color: #fff;
 }
 
+.container-alert {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
 .container-alert .alert-msg {
     margin: 0;
     font-size: 16px;
@@ -88,6 +95,38 @@ h1 {
     color: #eb0606;
 }
 
+.question-msg {
+    color: #000;
+}
+
+.confirm-container {
+    margin-top: 10px;
+    display: none;
+    align-items: center;
+    column-gap: 40px;
+}
+
+.fa-solid.fa-circle-check,
+.fa-solid.fa-circle-xmark {
+    font-size: 30px;
+    cursor: pointer;
+    transition: 0.5s ease-out all;
+}
+
+.fa-solid.fa-circle-check {
+    color: #2cb129;
+}
+
+.fa-solid.fa-circle-check:hover {
+    color: #228e20;
+}
+.fa-solid.fa-circle-xmark {
+    color: #eb0606;
+}
+
+.fa-solid.fa-circle-xmark:hover {
+    color: #a80808;
+}
 
 .task-list {
     display: flex;
