@@ -130,9 +130,10 @@ h1 {
 }
 
 .task-list {
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
     display: flex;
-    align-items: center;
-    justify-content: center;
     flex-direction: column;
     width: 100%;
     gap: 12px;
@@ -144,9 +145,10 @@ h1 {
     justify-content: flex-start;
     background-color: #eceef0;
     width: 100%;
-    padding: 11px;
+    padding: 11px 15px;
     border-radius: 7px;
     column-gap: 12px;
+    box-sizing: border-box;
 }
 
 .input-check {
@@ -154,6 +156,11 @@ h1 {
     width: 20px;
     height: 20px;
     accent-color: #31cc2f;
+}
+
+.input-check:checked + .task-value {
+    text-decoration: line-through;
+    color: gray;
 }
 
 .task-value {

@@ -4,6 +4,15 @@ let addMode = true
 let tasks = []
 let currentId = '' 
 
+const saveTasksToLocalStorage = () => {
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+}
+
+const getTasksFromLocalStorage = () => {
+    const storedTasks = localStorage.getItem('tasks')
+    tasks = storedTasks ? JSON.parse(storedTasks) : []
+}
+
 const generateId = () => {
     const timestamp = Date.now();
     const randomNum = Math.floor(Math.random() * 1000)
@@ -19,7 +28,7 @@ const getTasks = () => {
     tasks.forEach(e => {
         const taskContainer = document.createElement('div')
         const inputCheck = document.createElement('input')
-        const taskValue = document.createElement('p')
+        const taskValue = document.createElement('label')
         const btnContainer = document.createElement('div')
         const editBtn = document.createElement('i')
         const deleteBtn = document.createElement('i')
@@ -28,10 +37,12 @@ const getTasks = () => {
 
         inputCheck.setAttribute('type', 'checkbox')
         inputCheck.setAttribute('value', 'done')
+        inputCheck.id = e.id
         inputCheck.classList.add('input-check')
 
         taskValue.textContent = e.task
         taskValue.classList.add('task-value')
+        taskValue.setAttribute('for', e.id)
 
         btnContainer.classList.add('btn-container')
 
@@ -56,6 +67,11 @@ const alertMessage = (delStyle1, delStyle2, text, styles) => {
     alertMsg.classList.add(styles)
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    getTasksFromLocalStorage()
+    getTasks()
+})
+
 const addTask = () => {
     const input = document.querySelector('input')
     const confirmContainer = document.querySelector('.confirm-container')
@@ -69,6 +85,7 @@ const addTask = () => {
         confirmContainer.style.display = 'none'
     } else {
         tasks = [...tasks, task]
+        saveTasksToLocalStorage()
         input.value = ''
         alertMessage('error-msg', 'question-msg', 'Task added successfully!', 'add-msg')
         confirmContainer.style.display = 'none'
@@ -79,13 +96,13 @@ const addTask = () => {
 const editTask = id => {
     const input = document.querySelector('input')
     const addIcon = document.querySelector('.fa-solid.fa-plus')
-        const editIcon = document.querySelector('.fa-solid.fa-rotate')
+    const editIcon = document.querySelector('.fa-solid.fa-rotate')
 
     const taskIndex = tasks.findIndex(task => task.id === id)
     
     if(taskIndex !== -1) {
         tasks[taskIndex].task = input.value
-
+        saveTasksToLocalStorage()
         getTasks()
 
         alertMessage('error-msg', 'question-msg', 'Task edited successfully!', 'add-msg')
@@ -110,6 +127,7 @@ const deleteTask = task => {
     // Confirmar eliminación
     newConfirmBtn.addEventListener('click', () => {
         tasks = tasks.filter(e => e.task !== taskName)
+        saveTasksToLocalStorage()
         task.remove()
         alertMessage('error-msg', 'question-msg', 'Task successfully deleted!', 'add-msg')
         confirmContainer.style.display = 'none'
@@ -133,11 +151,21 @@ const getTask = searchedId => {
     return null
 }
 
-addOrUpdateButton.addEventListener('click', () => {
+function handleTask() {
     if(addMode) {
         addTask()
     } else {
         editTask(currentId)
+    }
+}
+
+addOrUpdateButton.addEventListener('click', () => {
+    handleTask()
+})
+
+document.addEventListener('keydown', e => {
+    if(e.key === 'Enter') {
+        handleTask()
     }
 })
 
