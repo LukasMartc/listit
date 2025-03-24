@@ -1,9 +1,8 @@
 const taskList = document.querySelector('.task-list')
 const addOrUpdateButton = document.querySelector('.add-update')
-const input = document.querySelector('input')
-const alertMsg = document.querySelector('.alert-msg')
 let addMode = true
 let tasks = []
+let currentId = '' 
 
 const generateId = () => {
     const timestamp = Date.now();
@@ -37,6 +36,7 @@ const getTasks = () => {
         btnContainer.classList.add('btn-container')
 
         editBtn.classList.add('fa-solid', 'fa-pen')
+        editBtn.setAttribute('data-id', e.id)
         deleteBtn.classList.add('fa-solid', 'fa-trash-can')
         deleteBtn.setAttribute('data-id', e.id)
         
@@ -50,12 +50,14 @@ const getTasks = () => {
 }
 
 const alertMessage = (delStyle1, delStyle2, text, styles) => {
+    const alertMsg = document.querySelector('.alert-msg')
     alertMsg.classList.remove(delStyle1, delStyle2)
     alertMsg.textContent = text
     alertMsg.classList.add(styles)
 }
 
 const addTask = () => {
+    const input = document.querySelector('input')
     const confirmContainer = document.querySelector('.confirm-container')
     const task = {
         id: generateId(),
@@ -74,12 +76,24 @@ const addTask = () => {
     }
 }
 
-const handleAdd = e => {
+const editTask = id => {
+    const input = document.querySelector('input')
+    const addIcon = document.querySelector('.fa-solid.fa-plus')
+        const editIcon = document.querySelector('.fa-solid.fa-rotate')
 
-}
+    const taskIndex = tasks.findIndex(task => task.id === id)
+    
+    if(taskIndex !== -1) {
+        tasks[taskIndex].task = input.value
 
-const editTask = () => {
+        getTasks()
 
+        alertMessage('error-msg', 'question-msg', 'Task edited successfully!', 'add-msg')
+        addMode = true
+        addIcon.style.display = 'block'
+        editIcon.style.display = 'none'
+        input.value = ''
+    }
 }
 
 const deleteTask = task => {
@@ -123,16 +137,44 @@ addOrUpdateButton.addEventListener('click', () => {
     if(addMode) {
         addTask()
     } else {
-        editTask()
+        editTask(currentId)
     }
 })
 
 taskList.addEventListener('click', e => {
     if(e.target.classList.contains('fa-trash-can')) {
+        const input = document.querySelector('input')
+        const addIcon = document.querySelector('.fa-solid.fa-plus')
+        const editIcon = document.querySelector('.fa-solid.fa-rotate')
+
+        addMode = true
+        input.value = ''
+        addIcon.style.display = 'block'
+        editIcon.style.display = 'none'
+
         const id = e.target.dataset.id
         const task = getTask(id)
         if(task) {
             deleteTask(task)
         }
     } 
+})
+
+taskList.addEventListener('click', e => {
+    if(e.target.classList.contains('fa-pen')) {
+        const input = document.querySelector('input')
+        const addIcon = document.querySelector('.fa-solid.fa-plus')
+        const editIcon = document.querySelector('.fa-solid.fa-rotate')
+
+        addMode = false
+        const id = e.target.dataset.id
+        const task = getTask(id)
+        const taskName = task.children[1].innerText
+        input.value = taskName
+        alertMessage('add-msg', 'error-msg', 'Editing...', 'question-msg')
+        addIcon.style.display = 'none'
+        editIcon.style.display = 'block'
+        
+        currentId = id
+    }
 })
