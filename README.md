@@ -27,15 +27,17 @@ Puedes probar la aplicación en vivo [aquí](https://lukasmartc.github.io/listit
 
 ## 📂 Estructura del Proyecto
 
+```
 📂 ListIt
 ├── 📂 assets
-│ └── logo.png # Logo de la aplicación
+│    ├── logo.png # Logo de la aplicación
 ├── 📂 scripts
-│ └── script.js # Lógica principal
+│    ├── script.js # Lógica principal
 ├── 📂 styles
-│ └── style.css # Estilos CSS
+│    ├── style.css # Estilos CSS
 ├── index.html # Punto de entrada
 └── README.md # Documentación
+```
 
 ## 🖥️ Cómo Usar
 
